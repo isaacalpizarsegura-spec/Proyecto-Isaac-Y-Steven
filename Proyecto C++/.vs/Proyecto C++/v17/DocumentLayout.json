@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Mac\\Home\\Documents\\GitHub\\Proyecto-Isaac-y-Steven-Organizacion-de-datos\\Proyecto C\u002B\u002B\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{BB876B01-EED0-4F1C-9848-C7141606AD8E}|Proyecto C\u002B\u002B.vcxproj|C:\\Mac\\Home\\Documents\\GitHub\\Proyecto-Isaac-y-Steven-Organizacion-de-datos\\Proyecto C\u002B\u002B\\Proyecto C\u002B\u002B.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{BB876B01-EED0-4F1C-9848-C7141606AD8E}|Proyecto C\u002B\u002B.vcxproj|solutionrelative:Proyecto C\u002B\u002B.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Proyecto C\u002B\u002B.cpp",
+              "DocumentMoniker": "C:\\Mac\\Home\\Documents\\GitHub\\Proyecto-Isaac-y-Steven-Organizacion-de-datos\\Proyecto C\u002B\u002B\\Proyecto C\u002B\u002B.cpp",
+              "RelativeDocumentMoniker": "Proyecto C\u002B\u002B.cpp",
+              "ToolTip": "C:\\Mac\\Home\\Documents\\GitHub\\Proyecto-Isaac-y-Steven-Organizacion-de-datos\\Proyecto C\u002B\u002B\\Proyecto C\u002B\u002B.cpp",
+              "RelativeToolTip": "Proyecto C\u002B\u002B.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-11-12T00:28:28.372Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
