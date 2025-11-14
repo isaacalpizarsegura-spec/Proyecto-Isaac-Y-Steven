@@ -24,6 +24,19 @@ public:
         correo = c;
     }
 };
+struct Nodo {
+    Contacto dato;
+    Nodo* siguiente;
+    Nodo(const Contacto& c) : dato(c), siguiente(nullptr) {}
+};
+
+
+struct NodoArbol {
+    Contacto dato;
+    NodoArbol* izq;
+    NodoArbol* der;
+    NodoArbol(const Contacto& c) : dato(c), izq(nullptr), der(nullptr) {}
+};
 
 int main()
 {
