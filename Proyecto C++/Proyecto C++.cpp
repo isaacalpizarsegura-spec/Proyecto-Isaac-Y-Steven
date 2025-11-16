@@ -38,8 +38,21 @@ struct NodoArbol {
     NodoArbol(const Contacto& c) : dato(c), izq(nullptr), der(nullptr) {}
 };
 
+class BST {
+private:
+    NodoArbol* raiz;
+
+    NodoArbol* insertarRec(NodoArbol* nodo, const Contacto& c) {
+        if (!nodo) return new NodoArbol(c);
+        if (c.nombre < nodo->dato.nombre)
+            nodo->izq = insertarRec(nodo->izq, c);
+        else
+            nodo->der = insertarRec(nodo->der, c);
+        return nodo;
+    }
+
 int main()
 {
-    std::cout << !\n";
+   
 }
 
