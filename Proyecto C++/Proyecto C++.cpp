@@ -50,6 +50,26 @@ private:
             nodo->der = insertarRec(nodo->der, c);
         return nodo;
     }
+    void inordenRec(NodoArbol* nodo) {
+        if (!nodo) return;
+        inordenRec(nodo->izq);
+        cout << nodo->dato.nombre << " | " << nodo->dato.telefono << " | " << nodo->dato.correo << "\n";
+        inordenRec(nodo->der);
+    }
+
+    void preordenRec(NodoArbol* nodo) {
+        if (!nodo) return;
+        cout << nodo->dato.nombre << " | " << nodo->dato.telefono << " | " << nodo->dato.correo << "\n";
+        preordenRec(nodo->izq);
+        preordenRec(nodo->der);
+    }
+
+    void liberar(NodoArbol* nodo) {
+        if (!nodo) return;
+        liberar(nodo->izq);
+        liberar(nodo->der);
+        delete nodo;
+    }
 
 int main()
 {
