@@ -70,6 +70,23 @@ private:
         liberar(nodo->der);
         delete nodo;
     }
+public:
+    BST() { raiz = nullptr; }
+    ~BST() { liberar(raiz); }
+
+    void insertar(const Contacto& c) { raiz = insertarRec(raiz, c); }
+    void limpiar() { liberar(raiz); raiz = nullptr; }
+
+    void mostrarInorden() {
+        if (!raiz) { cout << "Arbol vacío.\n"; return; }
+        inordenRec(raiz);
+    }
+
+    void mostrarPreorden() {
+        if (!raiz) { cout << "Arbol vacío.\n"; return; }
+        preordenRec(raiz);
+    }
+};
 
 int main()
 {
