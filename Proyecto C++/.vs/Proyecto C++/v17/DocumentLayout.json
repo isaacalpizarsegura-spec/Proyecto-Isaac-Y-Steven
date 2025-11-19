@@ -14,8 +14,12 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -24,7 +28,7 @@
               "RelativeDocumentMoniker": "Proyecto C\u002B\u002B.cpp",
               "ToolTip": "C:\\Mac\\Home\\Documents\\GitHub\\Proyecto-Isaac-Y-Steven\\Proyecto C\u002B\u002B\\Proyecto C\u002B\u002B.cpp",
               "RelativeToolTip": "Proyecto C\u002B\u002B.cpp",
-              "ViewState": "AgIAADcAAABAAAAAAGAwwFgAAAACAAAAAAAAAA==",
+              "ViewState": "AgIAAJEAAACABAAAAIAZwKIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-11-12T00:28:28.372Z",
               "EditorCaption": ""
