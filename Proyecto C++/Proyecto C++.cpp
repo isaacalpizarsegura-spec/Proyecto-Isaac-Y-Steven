@@ -1,4 +1,5 @@
 ﻿
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -24,6 +25,8 @@ public:
         correo = c;
     }
 };
+
+
 struct Nodo {
     Contacto dato;
     Nodo* siguiente;
@@ -50,6 +53,7 @@ private:
             nodo->der = insertarRec(nodo->der, c);
         return nodo;
     }
+
     void inordenRec(NodoArbol* nodo) {
         if (!nodo) return;
         inordenRec(nodo->izq);
@@ -70,6 +74,7 @@ private:
         liberar(nodo->der);
         delete nodo;
     }
+
 public:
     BST() { raiz = nullptr; }
     ~BST() { liberar(raiz); }
@@ -89,7 +94,6 @@ public:
 };
 
 
-
 class Agenda {
 private:
     vector<Contacto> contactos;
@@ -101,7 +105,7 @@ public:
     void agregarContacto(const Contacto& c) {
         contactos.push_back(c);
         historial.push("Agregar: " + c.nombre);
-        arbol.insertar(c.nombre);   // ← CORREGIDO
+        reconstruirArbol();
         cout << "Contacto agregado: " << c.nombre << "\n";
     }
 
@@ -147,22 +151,193 @@ public:
     bool eliminarContacto(const string& nombre) {
         if (contactos.empty()) return false;
 
-        for (size_t i = 0; i < contactos.size(); i++) {
-            if (contactos[i].nombre == nombre) {
-                historial.push("Eliminar: " + contactos[i].nombre);
-                contactos.erase(contactos.begin() + i);
-                cout << "Contacto eliminado: " << nombre << "\n";
-                return true;
+        Nodo* head = nullptr;
+        Nodo* tail = nullptr;
+        for (auto& c : contactos) {
+            Nodo* node = new Nodo(c);
+            if (!head) head = tail = node;
+            else { tail->siguiente = node; tail = node; }
+        }
+
+        Nodo* curr = head;
+        Nodo* prev = nullptr;
+        bool eliminado = false;
+        while (curr) {
+            if (curr->dato.nombre == nombre) {
+                if (prev) prev->siguiente = curr->siguiente;
+                else head = curr->siguiente;
+                historial.push("Eliminar: " + curr->dato.nombre);
+                Nodo* borrar = curr;
+                curr = curr->siguiente;
+                delete borrar;
+                eliminado = true;
+            }
+            else {
+                prev = curr;
+                curr = curr->siguiente;
             }
         }
 
-        cout << "No se encontró el contacto: " << nombre << "\n";
-        return false;
+        vector<Contacto> nuevo;
+        curr = head;
+        while (curr) {
+            nuevo.push_back(curr->dato);
+            Nodo* sig = curr->siguiente;
+            delete curr;
+            curr = sig;
+        }
+        contactos.swap(nuevo);
+        if (eliminado) {
+            reconstruirArbol();
+            cout << "Contacto eliminado.\n";
+        }
+        else {
+            cout << "No se encontró el contacto.\n";
+        }
+        return eliminado;
     }
+
+    void mostrarHistorial() {
+        if (historial.empty()) {
+            cout << "Historial vacío.\n";
+            return;
+        }
+        stack<string> copia = historial;
+        cout << "\nHistorial (última operación primero):\n";
+        while (!copia.empty()) {
+            cout << "- " << copia.top() << "\n";
+            copia.pop();
+        }
+    }
+
+    void encolarPendiente(const Contacto& c) {
+        pendientes.push(c);
+        cout << "Pendiente agregado: " << c.nombre << "\n";
+    }
+
+    void transferirPendientes() {
+        while (!pendientes.empty()) {
+            Contacto c = pendientes.front();
+            pendientes.pop();
+            agregarContacto(c);
+        }
+    }
+
+    void mostrarPendientes() {
+        if (pendientes.empty()) {
+            cout << "No hay contactos pendientes.\n";
+            return;
+        }
+        queue<Contacto> copia = pendientes;
+        while (!copia.empty()) {
+            Contacto c = copia.front();
+            copia.pop();
+            cout << "- " << c.nombre << " | " << c.telefono << "\n";
+        }
+    }
+
+    void reconstruirArbol() {
+        arbol.limpiar();
+        for (auto& c : contactos) arbol.insertar(c);
+    }
+
+    void mostrarArbolInorden() { arbol.mostrarInorden(); }
+    void mostrarArbolPreorden() { arbol.mostrarPreorden(); }
+
+    bool estaVacia() const { return contactos.empty(); }
 };
 
-int main()
-{
-   
+
+string leerLinea() {
+    string s;
+    getline(cin, s);
+    return s;
 }
 
+
+int main() {
+    Agenda agenda;
+    int opcion;
+    bool salir = false;
+
+    while (!salir) {
+        cout << "\n===== GESTOR DE AGENDA =====\n";
+        cout << "1. Agregar contacto\n";
+        cout << "2. Listar contactos\n";
+        cout << "3. Buscar contacto\n";
+        cout << "4. Eliminar contacto\n";
+        cout << "5. Ver historial\n";
+        cout << "6. Cola de pendientes\n";
+        cout << "7. Árbol de contactos\n";
+        cout << "8. Salir\n";
+        cout << "Seleccione una opción: ";
+        cin >> opcion;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        switch (opcion) {
+        case 1: {
+            string n, t, c;
+            cout << "Nombre: "; getline(cin, n);
+            cout << "Teléfono: "; getline(cin, t);
+            cout << "Correo: "; getline(cin, c);
+            agenda.agregarContacto(Contacto(n, t, c));
+            break;
+        }
+        case 2:
+            agenda.listarContactos();
+            break;
+        case 3: {
+            cout << "Buscar por nombre: ";
+            string nombre; getline(cin, nombre);
+            int pos = agenda.buscarBinariaPorNombre(nombre);
+            if (pos == -1) cout << "No encontrado.\n";
+            else cout << "Contacto encontrado en la posición " << pos + 1 << "\n";
+            break;
+        }
+        case 4: {
+            cout << "Nombre del contacto a eliminar: ";
+            string nombre; getline(cin, nombre);
+            agenda.eliminarContacto(nombre);
+            break;
+        }
+        case 5:
+            agenda.mostrarHistorial();
+            break;
+        case 6: {
+            int sub;
+            cout << "\n1. Encolar contacto\n2. Ver pendientes\n3. Transferir pendientes\n";
+            cout << "Seleccione: "; cin >> sub; cin.ignore();
+            if (sub == 1) {
+                string n, t, c;
+                cout << "Nombre: "; getline(cin, n);
+                cout << "Teléfono: "; getline(cin, t);
+                cout << "Correo: "; getline(cin, c);
+                agenda.encolarPendiente(Contacto(n, t, c));
+            }
+            else if (sub == 2) {
+                agenda.mostrarPendientes();
+            }
+            else if (sub == 3) {
+                agenda.transferirPendientes();
+            }
+            break;
+        }
+        case 7: {
+            int tipo;
+            cout << "\n1. Inorden\n2. Preorden\nSeleccione: ";
+            cin >> tipo; cin.ignore();
+            if (tipo == 1) agenda.mostrarArbolInorden();
+            else agenda.mostrarArbolPreorden();
+            break;
+        }
+        case 8:
+            salir = true;
+            cout << "Saliendo...\n";
+            break;
+        default:
+            cout << "Opción no válida.\n";
+        }
+    }
+
+    return 0;
+}
