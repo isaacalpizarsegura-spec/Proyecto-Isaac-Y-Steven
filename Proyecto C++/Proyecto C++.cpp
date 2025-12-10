@@ -268,9 +268,9 @@ int main() {
         cout << "4. Eliminar contacto\n";
         cout << "5. Ver historial\n";
         cout << "6. Cola de pendientes\n";
-        cout << "7. Árbol de contactos\n";
+        cout << "7. Arbol de contactos\n";
         cout << "8. Salir\n";
-        cout << "Seleccione una opción: ";
+        cout << "Seleccione una opcion: ";
         cin >> opcion;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
@@ -278,7 +278,7 @@ int main() {
         case 1: {
             string n, t, c;
             cout << "Nombre: "; getline(cin, n);
-            cout << "Teléfono: "; getline(cin, t);
+            cout << "Telefono: "; getline(cin, t);
             cout << "Correo: "; getline(cin, c);
             agenda.agregarContacto(Contacto(n, t, c));
             break;
@@ -291,7 +291,7 @@ int main() {
             string nombre; getline(cin, nombre);
             int pos = agenda.buscarBinariaPorNombre(nombre);
             if (pos == -1) cout << "No encontrado.\n";
-            else cout << "Contacto encontrado en la posición " << pos + 1 << "\n";
+            else cout << "Contacto encontrado en la posicion " << pos + 1 << "\n";
             break;
         }
         case 4: {
@@ -310,7 +310,7 @@ int main() {
             if (sub == 1) {
                 string n, t, c;
                 cout << "Nombre: "; getline(cin, n);
-                cout << "Teléfono: "; getline(cin, t);
+                cout << "Telefono: "; getline(cin, t);
                 cout << "Correo: "; getline(cin, c);
                 agenda.encolarPendiente(Contacto(n, t, c));
             }
@@ -335,7 +335,7 @@ int main() {
             cout << "Saliendo...\n";
             break;
         default:
-            cout << "Opción no válida.\n";
+            cout << "Opcion no valida.\n";
         }
     }
 
