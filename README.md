@@ -21,6 +21,11 @@ Instalacion:
 Clonar 
 git clone https://github.com/isaacalpizarsegura-spec/Proyecto-Isaac-Y-Steven.git
 
+Se usa en Visual Studio. 
+
+Se ejecuta, dentro del programa  permite registrar contactos, listarlos, ordenarlos,
+buscar por diferentes métodos, eliminar elementos mediante listas enlazadas, llevar un historial con pilas, 
+administrar contactos pendientes con colas y organizarlos en un árbol binario de búsqueda.
 
 
 
